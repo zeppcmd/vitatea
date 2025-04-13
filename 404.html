@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>404 - 页面未找到</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        :root {
+            --primary: #8BC34A;  /* 主色调改为草本绿 */
+            --secondary: #4CAF50; /* 辅助色调改为深绿 */
+            --light: #E8F5E9; /* 背景色改为淡绿 */
+            --text-dark: #2E7D32;
+            --text-light: #689F38;
+        }
+
+        body {
+            background: var(--light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .error-container h1 {
+            color: var(--primary);
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-container h2 {
+            color: var(--text-dark);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-container p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-home-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .back-home-btn:hover {
+            background-color: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>404</h1>
+        <h2>页面未找到</h2>
+        <p>很抱歉，您访问的页面不存在。</p>
+        <a href="/" class="back-home-btn">返回首页</a>
+    </div>
+</body>
+</html>
