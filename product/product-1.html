@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>果源素语 | 芒果糯米奶昔详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        :root {
+            --primary: #8BC34A;  /* 主色调改为草本绿 */
+            --secondary: #4CAF50; /* 辅助色调改为深绿 */
+            --light: #E8F5E9; /* 背景色改为淡绿 */
+            --text-dark: #2E7D32;
+            --text-light: #689F38;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(232, 245, 233, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+        }
+
+        .navbar:hover {
+            background: rgba(232, 245, 233, 1);
+        }
+
+        .logo {
+            width: 150px;
+            height: 40px;
+            background: url('https://img.picui.cn/free/2025/04/13/67faa3354ac5d.png') no-repeat center/contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 商品详情样式 */
+        .product-detail {
+            margin-top: 60px;
+            padding: 4rem 10%;
+            background: white;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .product-detail-image {
+            height: 500px;
+            background: url('https://img.picui.cn/free/2025/04/13/67faa05f96669.png') center/cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-detail-image:hover {
+            transform: scale(1.02);
+        }
+
+        .product-detail h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-detail h3 {
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-detail p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1rem;
+        }
+
+        .product-detail ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .buy-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: var(--secondary);
+        }
+
+        /* 移动端菜单按钮样式 */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 2rem;
+            height: 0.25rem;
+            background: var(--text-dark);
+            border-radius: 10px;
+            transition: all 0.3s linear;
+            position: relative;
+            transform-origin: 1px;
+        }
+
+        /* 移动端菜单激活状态 */
+        .mobile-menu-toggle.active span:first-child {
+            transform: rotate(45deg);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:last-child {
+            transform: rotate(-45deg);
+        }
+
+        /* 移动端导航链接样式 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 70%;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .product-detail {
+                grid-template-columns: 1fr;
+            }
+
+            .product-detail h2 {
+                font-size: 2rem;
+            }
+
+            .product-detail h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="logo"></a>
+        <div class="nav-links">
+            <a href="https://www.vitatea.top/index.html"style="font-weight: bold; color: #000000;">首页</a>
+            <a href="https://www.vitatea.top/index.html#products"style="font-weight: bold; color: #000000;">产品</a>
+            <a href="https://www.vitatea.top/index.html#story"style="font-weight: bold; color: #000000;">品牌故事</a>
+            <a href="https://www.vitatea.top/contact.html"style="font-weight: bold; color: #000000;">联系我们</a>
+        </div>
+        <!-- 移动端菜单按钮，初始隐藏 -->
+        <div class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.pageYOffset > 0) {
+                // 修改滚动时导航栏背景为白色半透明
+                navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+            } else {
+                navbar.style.backgroundColor = 'rgba(232, 245, 233, 0.95)';
+            }
+        });
+
+        // 移动端菜单功能
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+
+    <!-- 商品详情 -->
+    <section class="product-detail">
+        <div class="product-detail-image"></div>
+        <div>
+            <h2>芒果糯米奶昔</h2>
+            <h3>500ml | 零糖·轻盈</h3>
+            <ul>
+                <li>选用新鲜芒果，果肉饱满多汁</li>
+                <li>添加糯米，口感丰富有层次</li>
+                <li>零糖配方，健康无负担</li>
+                <li>采用现代冷榨技术，保留营养成分</li>
+            </ul>
+            <button class="buy-button">立即购买</button>
+        </div>
+    </section>
+
+    <!-- 版权信息 -->
+    <footer style="text-align: center; padding: 1rem; background-color: var(--light); color: var(--text-light);">
+        <p>&copy; 2025 果源素语. 保留所有权利.</p>
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" style="color: var(--text-light);">粤ICP备2025360654号-1</a></p>
+    </footer>
+</body>
+</html>
